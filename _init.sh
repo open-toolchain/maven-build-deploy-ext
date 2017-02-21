@@ -5,8 +5,6 @@
 # Note to U.S. Government Users Restricted Rights:
 # Use, duplication or disclosure restricted by GSA ADP Schedule
 # Contract with IBM Corp.
-
-
 #############
 # Colors    #
 #############
@@ -14,7 +12,6 @@ export green='\e[0;32m'
 export red='\e[0;31m'
 export label_color='\e[0;33m'
 export no_color='\e[0m' # No Color
-
 
 ##################################################
 # Simple function to only run command if DEBUG=1 # 
@@ -25,8 +22,6 @@ debugme() {
 
 sudo apt-get update &> /dev/null
 sudo apt-get -y install curl &> /dev/null
-
-
 
 set +e
 set +x
