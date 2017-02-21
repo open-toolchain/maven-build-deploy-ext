@@ -1,0 +1,126 @@
+{
+    "id": "ibm.devops.services.pipeline.npm.build",
+    "version": 1,
+    "name_key": "ExtName",
+    "desc_key": "ExtDesc",
+    "extension_type": "Build",
+    "message_key": "ExtMessage",
+    "inputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
+    ],
+    "params": [
+        {
+            "name": "SERVICE_INSTANCE",
+            "type": "Text",
+            "required": false,
+            "default_value": "(default)",
+            "label_key": "SERVICE_INSTANCE_KEY",
+            "desc_key": "SERVICE_INSTANCE_DESC"
+        },
+        {
+            "name": "SERVICE_INSTANCE_TYPE",
+            "type": "Select",
+            "required": "false",
+            "default_value": "nexus",
+            "label_key": "SERVICE_INSTANCE_TYPE_KEY",
+            "desc_key": "SERVICE_INSTANCE_TYPE_DESC",
+            "options": [
+                {
+                    "label_key": "NEXUS_KEY",
+                    "value": "nexus"
+                },
+                {
+                    "label_key": "ARTIFACTORY_KEY",
+                    "value": "artifactory"
+                }
+            ]
+        },
+        {
+            "name": "BUILD_COMMAND",
+            "type": "TextArea",
+            "required": false,
+            "default_value": "#!/bin/bash\n# environment variables are available:\n# NPM_NAME: name of the service instance\n# NPM_USER_ID: userid for the npm registry\n# NPM_TOKEN: the token or password for the npm registry\n# NPM_RELEASE_URL: the private NPM registry\n# NPM_MIRROR_URL: the proxy NPM registry, used as the default NPM registry\n# NPM_MODULE_NAME: the module name of the package.json at the root of the workspace if available.\n\nnpm install\n#npm publish --registry \"${NPM_RELEASE_URL}\"\n#npm install \"${NPM_MODULE_NAME}\"",
+            "label_key": "BUILD_COMMAND_KEY",
+            "desc_key": "BUILD_COMMAND_DESC"
+        },
+        {
+            "name": "WORKING_DIR",
+            "type": "Text",
+            "required": false,
+            "default_value": "",
+            "label_key": "WORKING_DIR_KEY",
+            "desc_key": "WORKING_DIR_DESC"
+        },
+        {
+            "name": "ARCHIVE_DIR",
+            "type": "Text",
+            "required": false,
+            "default_value": "",
+            "label_key": "ARCHIVE_DIR_KEY",
+            "desc_key": "ARCHIVE_DIR_DESC"
+        }
+    ],
+    "outputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
+    ],
+    "execution": {
+        "type": "JenkinsDocker",
+        "shell": "#!/bin/bash
+set +x
+set +e
+
+export TOOLCHAIN_TOKEN PIPELINE_TOOLCHAIN_ID
+export SERVICE_INSTANCE=\"#SERVICE_INSTANCE#\"
+export SERVICE_INSTANCE_TYPE=\"#SERVICE_INSTANCE_TYPE#\"
+export TMP_ARCHIVE_DIR=\"#ARCHIVE_DIR#\"
+export TMP_WORKING_DIR=\"#WORKING_DIR#\"
+
+
+. $EXT_DIR/_init.sh
+
+# get toolchain services
+$EXT_DIR/get-service-instances.sh
+if [ $? -ne 0 ]; then
+    echo \"Failed to load toolchain\"
+    exit 1
+fi
+
+#generate Maven environment variables from #SERVICE_INSTANCE_TYPE# service instance
+node $EXT_DIR/generate-maven-env.js >/tmp/maven.txt
+if [ ! -s /tmp/maven.txt ]; then
+    echo \"Error, no maven #SERVICE_INSTANCE_TYPE# card available\"
+    exit 1
+fi
+. /tmp/maven.txt
+
+#create settings.xml file
+$EXT_DIR/create-settings.sh
+
+#set up directories
+export ARCHIVE_DIR=.
+if [ ! -z \"$TMP_ARCHIVE_DIR\"]; then
+    export ARCHIVE_DIR=\"$TMP_ARCHIVE_DIR\"
+fi
+if [ ! -z \"$TMP_WORKING_DIR\"]; then
+    cd \"$TMP_WORKING_DIR\"
+fi
+
+
+#BUILD_COMMAND#
+if [ $? -ne 0 ]; then
+    echo \"Failed during execution of build command\"
+    exit 1
+fi
+
+"
+    }
+    },
+    "project": "https://hub.jazz.net/project/idsorg/otc-cti-broker",
+    "project_contact": "olivier_thomann@ca.ibm.com"
+}
