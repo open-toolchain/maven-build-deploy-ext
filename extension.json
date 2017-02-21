@@ -102,6 +102,9 @@ fi
 #create settings.xml file
 $EXT_DIR/create-settings.sh
 
+echo "settings.xml file contents"
+cat /tmp/settings.xml
+
 #set up directories
 export ARCHIVE_DIR=.
 if [ ! -z \"$TMP_ARCHIVE_DIR\"]; then
