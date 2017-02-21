@@ -42,7 +42,7 @@
             "name": "BUILD_COMMAND",
             "type": "TextArea",
             "required": false,
-            "default_value": "#!/bin/bash\n# environment variables are available:\n# NPM_NAME: name of the service instance\n# NPM_USER_ID: userid for the npm registry\n# NPM_TOKEN: the token or password for the npm registry\n# NPM_RELEASE_URL: the private NPM registry\n# NPM_MIRROR_URL: the proxy NPM registry, used as the default NPM registry\n# NPM_MODULE_NAME: the module name of the package.json at the root of the workspace if available.\n\nnpm install\n#npm publish --registry \"${NPM_RELEASE_URL}\"\n#npm install \"${NPM_MODULE_NAME}\"",
+            "default_value": "#!/bin/bash\n# environment variables are available:\n# MAVEN_NAME: name of the service instance\n# MAVEN_USER_ID: userid for the maven repository\n# MAVEN_TOKEN: the token or password for the maven repository\n# MAVEN_SNAPSHOT_URL: ther maven snapshot repository\n# MAVEN_RELEASE_URL: the maven release repository\n# MAVEN_MIRROR_URL: the maven mirror repository\n# The settings.xml is available in /tmp/settings.xml\n\nmvn -B clean package \n#mvn -s /tmp/settings.xml -DaltDeploymentRepository=${MAVEN_NAME}::default::${MAVEN_SNAPSHOT_URL} ",
             "label_key": "BUILD_COMMAND_KEY",
             "desc_key": "BUILD_COMMAND_DESC"
         },

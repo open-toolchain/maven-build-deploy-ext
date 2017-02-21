@@ -6,7 +6,7 @@
 # Use, duplication or disclosure restricted by GSA ADP Schedule
 # Contract with IBM Corp.
 
-cat - >> $HOME/settings.xml <<EOF
+cat - >> /tmp/settings.xml <<EOF
 <settings>
   <pluginGroups>
     <pluginGroup>org.sonatype.plugins</pluginGroup>
@@ -14,10 +14,10 @@ cat - >> $HOME/settings.xml <<EOF
 EOF
 
 if [ ! -z "${MAVEN_MIRROR_URL}" ]; then
-cat - >> $HOME/settings.xml <<EOF
+cat - >> /tmp/settings.xml <<EOF
   <profiles>
     <profile>
-      <id>artifactory</id>
+      <id>maven</id>
       <repositories>
         <repository>
           <id>${MAVEN_NAME}</id>
@@ -31,13 +31,13 @@ cat - >> $HOME/settings.xml <<EOF
   </profiles>
   <activeProfiles>
     <!--make the profile active all the time -->
-    <activeProfile>artifactory</activeProfile>
+    <activeProfile>maven</activeProfile>
   </activeProfiles>
 EOF
 
 fi
 
-cat - >> $HOME/settings.xml <<EOF
+cat - >> /tmp/settings.xml <<EOF
   <servers>
     <server>
       <id>${MABEN_NAME}</id>
@@ -48,6 +48,6 @@ cat - >> $HOME/settings.xml <<EOF
 EOF
 
 
-cat - >> $HOME/settings.xml <<EOF
+cat - >> /tmp/settings.xml <<EOF
 </settings>
 EOF
