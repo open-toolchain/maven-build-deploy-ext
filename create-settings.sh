@@ -37,7 +37,7 @@ cat - >> /tmp/settings.xml <<EOF
     <server>
       <username>${MAVEN_USER_ID}</username>
       <password>${MAVEN_TOKEN}</password>
-      <id>release</id>
+      <id>releases</id>
     </server>
 EOF
 fi
