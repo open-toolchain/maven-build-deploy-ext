@@ -42,7 +42,7 @@
             "name": "BUILD_COMMAND",
             "type": "TextArea",
             "required": false,
-            "default_value": "#!/bin/bash\n# environment variables are available:\n# MAVEN_NAME: name of the service instance\n# MAVEN_USER_ID: userid for the maven repository\n# MAVEN_TOKEN: the token or password for the maven repository\n# MAVEN_SNAPSHOT_URL: ther maven snapshot repository\n# MAVEN_RELEASE_URL: the maven release repository\n# MAVEN_MIRROR_URL: the maven mirror repository\n# The settings.xml is available in /tmp/settings.xml\n\nmvn -B clean package \n#mvn -s /tmp/settings.xml -DaltDeploymentRepository=${MAVEN_NAME}::default::${MAVEN_SNAPSHOT_URL} deploy\n",
+            "default_value": "#!/bin/bash\n# environment variables are available:\n# MAVEN_NAME: name of the service instance\n# MAVEN_USER_ID: userid for the maven repository\n# MAVEN_TOKEN: the token or password for the maven repository\n# MAVEN_SNAPSHOT_URL: the maven snapshot repository\n# MAVEN_RELEASE_URL: the maven release repository\n# MAVEN_MIRROR_URL: the maven mirror repository\n# The settings.xml is available in /tmp/settings.xml\n# The name of the snapshots repository is 'snapshots'\n# The name of the release repository is 'releases'\n# The name of the mirror repository is 'central'\n\nmvn -B clean package \n#mvn -s /tmp/settings.xml -DaltDeploymentRepository=snapshots::default::${MAVEN_SNAPSHOT_URL} deploy\n",
             "label_key": "BUILD_COMMAND_KEY",
             "desc_key": "BUILD_COMMAND_DESC"
         },
