@@ -40,7 +40,7 @@ fi
 cat - >> /tmp/settings.xml <<EOF
   <servers>
     <server>
-      <id>${MABEN_NAME}</id>
+      <id>${MAVEN_NAME}</id>
       <username>${MAVEN_USER_ID}</username>
       <password>${MAVEN_TOKEN}</password>
     </server>

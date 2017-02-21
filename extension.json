@@ -99,11 +99,8 @@ if [ ! -s /tmp/maven.txt ]; then
 fi
 . /tmp/maven.txt
 
-#create settings.xml file
+#create /tmp/settings.xml file
 $EXT_DIR/create-settings.sh
-
-echo "settings.xml file contents"
-cat /tmp/settings.xml
 
 #set up directories
 export ARCHIVE_DIR=.
