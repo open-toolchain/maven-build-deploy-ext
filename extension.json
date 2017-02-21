@@ -111,8 +111,6 @@ if [ ! -z \"$TMP_WORKING_DIR\"]; then
     cd \"$TMP_WORKING_DIR\"
 fi
 
-cat /tmp/settings.xml
-
 #BUILD_COMMAND#
 if [ $? -ne 0 ]; then
     echo \"Failed during execution of build command\"
