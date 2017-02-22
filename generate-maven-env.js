@@ -13,7 +13,7 @@ var services = JSON.parse(fs.readFileSync(process.env.SERVICE_INSTANCE_FILE)).se
 var maven_service = findServiceInstance(services, process.env.SERVICE_INSTANCE_TYPE, process.env.SERVICE_INSTANCE);
 if (maven_service) {
     var id = maven_service.parameters.name,
-        url = maven_service.parameters.dashboard_url,
+        release_url = maven_service.parameters.release_url,
         mirror_url = maven_service.parameters.mirror_url,
         snapshot_url = maven_service.parameters.snapshot_url,
         user_id = maven_service.parameters.user_id,
@@ -21,7 +21,7 @@ if (maven_service) {
     console.log('export MAVEN_NAME="' + id + '"');
     console.log('export MAVEN_USER_ID="' + user_id + '"');
     console.log('export MAVEN_TOKEN="' + token + '"');
-    console.log('export MAVEN_RELEASE_URL="' + url + '"');
+    console.log('export MAVEN_RELEASE_URL="' + release_url + '"');
     console.log('export MAVEN_SNAPSHOT_URL="' + snapshot_url + '"');
     console.log('export MAVEN_MIRROR_URL="' + mirror_url + '"');
 }
