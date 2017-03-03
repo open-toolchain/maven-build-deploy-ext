@@ -17,4 +17,4 @@
 
 curl -s -H "Authorization: ${TOOLCHAIN_TOKEN}" \
 -H 'Content-Type: application/json' \
-https://devops-api.stage1.ng.bluemix.net/v1/toolchains/${PIPELINE_TOOLCHAIN_ID}/services >"$SERVICE_INSTANCE_FILE"
+${TOOLCHAINS_API}/${PIPELINE_TOOLCHAIN_ID}/services >"$SERVICE_INSTANCE_FILE"
