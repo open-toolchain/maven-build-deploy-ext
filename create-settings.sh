@@ -15,6 +15,7 @@
 #   See the License for the specific language governing permissions and
 #*******************************************************************************
 
+mkdir -p "$SETTINGS_DIR"
 cat - >> "$SETTINGS_FILE" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
