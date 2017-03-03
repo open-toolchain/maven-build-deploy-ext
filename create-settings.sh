@@ -15,7 +15,7 @@
 #   See the License for the specific language governing permissions and
 #*******************************************************************************
 
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -24,7 +24,7 @@ EOF
 
 # Add all available servers
 if [ ! -z "${MAVEN_MIRROR_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
     <server>
       <username>${MAVEN_USER_ID}</username>
       <password>${MAVEN_TOKEN}</password>
@@ -33,7 +33,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 if [ ! -z "${MAVEN_SNAPSHOT_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
     <server>
       <username>${MAVEN_USER_ID}</username>
       <password>${MAVEN_TOKEN}</password>
@@ -42,7 +42,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 if [ ! -z "${MAVEN_RELEASE_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
     <server>
       <username>${MAVEN_USER_ID}</username>
       <password>${MAVEN_TOKEN}</password>
@@ -50,7 +50,7 @@ cat - >> /tmp/settings.xml <<EOF
     </server>
 EOF
 fi
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
   </servers>
   <profiles>
     <profile>
@@ -60,7 +60,7 @@ EOF
 
 
 if [ ! -z "${MAVEN_MIRROR_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
         <repository>
           <id>central</id>
           <url>${MAVEN_MIRROR_URL}</url>
@@ -71,7 +71,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 if [ ! -z "${MAVEN_SNAPSHOT_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
         <repository>
           <id>snapshots</id>
           <url>${MAVEN_SNAPSHOT_URL}</url>
@@ -85,7 +85,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 if [ ! -z "${MAVEN_RELEASE_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
         <repository>
           <id>releases</id>
           <url>${MAVEN_RELEASE_URL}</url>
@@ -99,13 +99,13 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
       </repositories>
      <pluginRepositories>
 EOF
 
 if [ ! -z "${MAVEN_MIRROR_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
         <pluginRepository>
           <id>central</id>
           <url>${MAVEN_MIRROR_URL}</url>
@@ -116,7 +116,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 if [ ! -z "${MAVEN_SNAPSHOT_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
         <pluginRepository>
           <id>snapshots</id>
           <url>${MAVEN_SNAPSHOT_URL}</url>
@@ -130,7 +130,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 if [ ! -z "${MAVEN_RELEASE_URL}" ]; then
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
         <pluginRepository>
           <id>releases</id>
           <url>${MAVEN_RELEASE_URL}</url>
@@ -144,7 +144,7 @@ cat - >> /tmp/settings.xml <<EOF
 EOF
 fi
 
-cat - >> /tmp/settings.xml <<EOF
+cat - >> "$SETTINGS_FILE" <<EOF
      </pluginRepositories>
     </profile>
   </profiles>
