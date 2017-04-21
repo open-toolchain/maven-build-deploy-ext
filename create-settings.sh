@@ -51,9 +51,57 @@ cat - >> "$SETTINGS_FILE" <<EOF
     </server>
 EOF
 fi
+
 cat - >> "$SETTINGS_FILE" <<EOF
   </servers>
-  <profiles>
+EOF
+
+# Setup sonar server url
+if [ ! -z "${SONAR_SERVER_URL}" ]; then
+cat - >> "$SETTINGS_FILE" <<EOF
+    <pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+EOF
+fi
+
+cat - >> "$SETTINGS_FILE" <<EOF
+    <profiles>
+EOF
+
+# Setup sonar server url
+if [ ! -z "${SONAR_SERVER_URL}" ]; then
+cat - >> "$SETTINGS_FILE" <<EOF
+    <profile>
+        <id>sonar</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <sonar.host.url>${SONAR_SERVER_URL}</sonar.host.url>
+EOF
+if [ ! -z "$SONAR_USER_TOKEN" ]; then
+if [ -z "$SONAR_USER_ID" ]; then
+# user token
+cat - >> "$SETTINGS_FILE" <<EOF
+            <sonar.login>${SONAR_USER_TOKEN}</sonar.login>
+EOF
+else
+#user login/password
+cat - >> "$SETTINGS_FILE" <<EOF
+            <sonar.login>${SONAR_USER_ID}</sonar.login>
+            <sonar.password>${SONAR_USER_TOKEN}</sonar.password>
+EOF
+fi
+fi
+
+cat - >> "$SETTINGS_FILE" <<EOF
+         </properties>
+    </profile>
+EOF
+fi
+
+cat - >> "$SETTINGS_FILE" <<EOF
     <profile>
       <id>${MAVEN_NAME}</id>
       <repositories>
@@ -130,6 +178,7 @@ cat - >> "$SETTINGS_FILE" <<EOF
         </pluginRepository>
 EOF
 fi
+
 if [ ! -z "${MAVEN_RELEASE_URL}" ]; then
 cat - >> "$SETTINGS_FILE" <<EOF
         <pluginRepository>
@@ -155,3 +204,4 @@ cat - >> "$SETTINGS_FILE" <<EOF
   </activeProfiles>
 </settings>
 EOF
+
