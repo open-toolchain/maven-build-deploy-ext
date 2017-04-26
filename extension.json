@@ -102,18 +102,18 @@ fi
 # generate sonar environment variables from #SONAR_SERVICE_INSTANCE# service instance
 node $EXT_DIR/generate-sonar-env.js >/tmp/sonar.txt
 if [ ! -s /tmp/sonar.txt ]; then
-    echo \"Error, no sonarqube card available\"
-    exit 1
-fi
+    echo \"Warning, no sonarqube card available\"
+else
 . /tmp/sonar.txt
+fi
 
 #generate Maven environment variables from #SERVICE_INSTANCE_TYPE# service instance
 node $EXT_DIR/generate-maven-env.js >/tmp/maven.txt
 if [ ! -s /tmp/maven.txt ]; then
-    echo \"Error, no maven #SERVICE_INSTANCE_TYPE# card available\"
-    exit 1
-fi
+    echo \"Warning, no maven #SERVICE_INSTANCE_TYPE# card available\"
+else
 . /tmp/maven.txt
+fi
 
 #create $SETTINGS_FILE file
 $EXT_DIR/create-settings.sh
