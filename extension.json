@@ -99,8 +99,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-cat $SERVICE_INSTANCE_FILE
-
 # generate sonar environment variables from #SONAR_SERVICE_INSTANCE# service instance
 node $EXT_DIR/generate-sonar-env.js >/tmp/sonar.txt
 if [ ! -s /tmp/sonar.txt ]; then
