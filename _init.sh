@@ -47,7 +47,8 @@ fi
 
 export PATH=/opt/IBM/node-v4.6.0/bin:$PATH
 
-export TOOLCHAINS_API=$( echo $PIPELINE_API_URL | sed 's/pipeline/toolchains/g' )
+export DOMAIN=$( echo $PIPELINE_API_URL | sed 's!^.*//\([^/]*\)/.*$!\1!g' | sed 's!^[^.]*!!g' )
+export TOOLCHAINS_API=devops-api${DOMAIN}/v1/toolchains
 export SERVICE_INSTANCE_FILE=/tmp/tc_services.json
 export SETTINGS_DIR=$HOME/.m2
 export SETTINGS_FILE=$SETTINGS_DIR/settings.xml
