@@ -1,15 +1,16 @@
 {
-	"name": "sonarqube-check",
-	"version": "0.1.0",
-	"description": "Task to check sonarqube results in Node.js.",
-	"dependencies": {
-		"bluebird": "latest",
-		"request-promise": "latest",
-		"request" : "latest",
-		"mkdirp": "^0.5.1"
-	},
-	"engines": {
-		"node": "^4.0.0"
-	},
-	"main": "checkTaskResult.js"
+  "name": "sonarqube-check",
+  "version": "0.1.0",
+  "description": "Task to check sonarqube results in Node.js.",
+  "dependencies": {
+    "async": "^2.4.1",
+    "bluebird": "latest",
+    "mkdirp": "^0.5.1",
+    "request": "latest",
+    "request-promise": "latest"
+  },
+  "engines": {
+    "node": "^4.0.0"
+  },
+  "main": "checkTaskResult.js"
 }
