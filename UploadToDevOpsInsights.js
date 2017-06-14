@@ -202,9 +202,11 @@ function perform(configfile) {
                                         + "/toolchainids/" + toolchain_id
                                         + "/buildartifacts/" + app_name
                                         + "/builds/" + build_id + "/results";
-
+                        var sonarqubedashboard = config.serverUrl + "/dashboard?id=" + config.projectKey;
                         var payload = {
-                            lifecycle_stage: "unittest",
+                            lifecycle_stage: "sonarqube",
+                            tool_name: "sonarqube",
+                            url: [sonarqubedashboard],
                             contents_type: "application/json",
                             contents: new Buffer(JSON.stringify(results.querysonarqube)).toString('base64')
                         }
