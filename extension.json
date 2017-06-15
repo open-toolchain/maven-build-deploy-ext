@@ -1,5 +1,5 @@
 {
-    "id": "ibm.devops.services.pipeline.maven.build.deploy.devops_insights",
+    "id": "ibm.devops.services.pipeline.maven.build.deploy",
     "version": 1,
     "name_key": "ExtName",
     "desc_key": "ExtDesc",
