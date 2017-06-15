@@ -130,7 +130,7 @@ function perform(configfile) {
 				if ((typeof sonaruserid !== 'undefined') && (typeof sonarusertoken !== 'undefined')) {
 					headers.authorization = "Basic " + new Buffer(sonaruserid + ":" + sonarusertoken).toString("base64");
 				} else if ((typeof sonaruserid === 'undefined') && (typeof sonarusertoken !== 'undefined')) {
-					headers.authorization = "Basic " + new Buffer(sonarusertoken).toString("base64");
+					headers.authorization = "Basic " + new Buffer(sonarusertoken + ":").toString("base64");
 				} else {
 					headers = null;
 				}
