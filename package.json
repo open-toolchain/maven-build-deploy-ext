@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Task to check sonarqube results in Node.js.",
   "dependencies": {
-    "async": "^2.4.1",
     "bluebird": "latest",
     "mkdirp": "^0.5.1",
     "request": "latest",
