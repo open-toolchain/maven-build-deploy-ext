@@ -159,10 +159,6 @@ fi
 if [ -s /tmp/sonarqualitygates.txt ]; then
 . /tmp/sonarqualitygates.txt
 
-# Irrespective of whether the Quality gate passed or failed, upload the scan data to DevOps Insights, if DevOps Insights is enabled
-node $EXT_DIR/UploadToDevOpsInsights.js target/sonar/report-task.txt
-
-
 if [ \"$SONARQUBE_RESULT\" == \"FAILED\" ]; then
     echo \"Quality gate check failed\"
     exit 1
